@@ -1,9 +1,9 @@
 @extends('layout')
 @section('content')
-    <h1>{{$title ? $title : 'All data'}}</h1>
+    <h1 class="text-center">{{$title ? $title : 'All data'}}</h1>
     @if (!empty($data))
-    <table class="table table-striped">
-        <thead>
+    <table class="table">
+        <thead class="table-primary sticky-top">
           <tr>
             <th scope="col">#</th>
             @foreach ($data[0] as $key => $item)
@@ -16,7 +16,7 @@
         <tbody>
             @foreach ($data as $key => $item)
                 <tr>
-                    <th scope="col">{{$key}}</th>
+                    <th scope="col">{{$key + 1}}</th>
                     @foreach ($item as $index => $value)
                         @if (in_array($index, $columns))
                             <th scope="col">{{$value}}</th>

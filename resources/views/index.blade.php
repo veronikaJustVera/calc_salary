@@ -7,15 +7,15 @@
             </ul>
         </div>
     @endif
-    <h1>Generate Salary Report</h1>
+    <h1 class="text-center">Generate Salary Report</h1>
     <form method="post" action="{{url('calc_salary')}}">
         @csrf
-        <div class="row form-group mt-4">
+        <div class="row mb-3 mt-4 p-3 rounded border border-primary d-flex align-items-center bg-white">
           <div class="col-sm mb-2">
             <label for="employee">Choose an employee</label>
             <select class="selectpicker" aria-label="Choose an employee" multiple data-live-search="true" name="employee_ids[]">
                 @foreach ($employees as $employee)
-                    <option value="{{$employee->id}}">{{$employee->name}} {{$employee->surname}}</option>
+                    <option value="{{$employee['id']}}">{{$employee['name']}} {{$employee['surname']}}</option>
                 @endforeach
             </select>
           </div>
@@ -32,12 +32,12 @@
           </div>
         </div>
     </form>
-    <div class="row mt-5">
+    <div class="row mt-3 mb-3 p-2 rounded border border-primary bg-white">
         <div>
             <a href="{{route('history')}}" class="link-primary">History</a>
         </div>
     </div>
-    <div class="row mt-5">
+    <div class="row mt-3 mb-3 p-2 rounded border border-primary bg-white">
         <div class="col-sm">
             <div>
                 <a href="{{route('film_add')}}" class="link-primary">Add a film</a>
@@ -65,7 +65,7 @@
         </div>
         @if ($errors->any())
             <div class="alert alert-danger mt-2" onclick="this.remove();">
-                <ul>
+                <ul class="m-0">
                     @foreach($errors->all() as $error)
                         <li>{{$error}}</li>
                     @endforeach

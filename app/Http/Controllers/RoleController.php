@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 use App\Models\Role;
 use App\Models\Salary;
 
@@ -31,9 +30,8 @@ class RoleController extends Controller
             'title' => 'required',
         ]);
         $data = $request->all();
-        unset($data['_token']);
-        $data['created_at'] = $data['updated_at'] = date('Y-m-d H:i:s');
-        DB::table('roles')->insert($data);
+        $roleInstance = new Role($data);
+        $roleInstance->save();
         return $this->backToMain('The role was successfully saved');
     }
     /**

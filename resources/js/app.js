@@ -4,27 +4,22 @@ var film_id = null;
 function setToken(token) {
     _TOKEN = token;
 }
-console.log('kkkk');
 $(document).ready(function(){
-    console.log('ready');
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    setTimeout(() => {    console.log('setTimeout');
+    setTimeout(() => {
         if(document.querySelector('select[name="employee_ids[]"] + .dropdown-toggle')) {
             bindClickToDropdown('employee_ids[]', 'employeeSelect');
         }
-        else if(document.querySelector('select[name="film_id"] + .dropdown-toggle')) {    console.log('film_id');
-            console.log('roleGet');
+        else if(document.querySelector('select[name="film_id"] + .dropdown-toggle')) {
             bindClickToDropdown('film_id', 'roleGet');
         }
     }, 1500);
 });
-// window.addEventListener('DOMContentLoaded', () => {
 
-// });
 // set dynamic date options by selected employees
 var dates = [];
 function multiDimensionalUnique(arr) {
@@ -45,18 +40,18 @@ function removeOptions(selectElement) {
     }
 }
 function bindClickToDropdown(name, methodName) {
-    var _toggler = document.querySelector('select[name="' + name +'"] + .dropdown-toggle');console.log(_toggler);
-        _toggler.addEventListener('click', () => {
-            var _options = document.querySelectorAll('select[name="' + name +'"] + .dropdown-toggle + .dropdown-menu div.inner ul li');
-            _options.forEach((option, key) => {
-                option.addEventListener('click', () => {
-                    var e = document.querySelectorAll('select[name="' + name +'"] option');
-                    var o = e[key];
-                    if(name == 'film_id') film_id = o.value;
-                    methods[methodName](o.value);
-                });
+    var _toggler = document.querySelector('select[name="' + name +'"] + .dropdown-toggle')
+    _toggler.addEventListener('click', () => {
+        var _options = document.querySelectorAll('select[name="' + name +'"] + .dropdown-toggle + .dropdown-menu div.inner ul li');
+        _options.forEach((option, key) => {
+            option.addEventListener('click', () => {
+                var e = document.querySelectorAll('select[name="' + name +'"] option');
+                var o = e[key];
+                if(name == 'film_id') film_id = o.value;
+                methods[methodName](o.value);
             });
         });
+    });
 }
 var methods = {
     employeeSelect: function(id) {

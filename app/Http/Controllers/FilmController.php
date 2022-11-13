@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Film;
@@ -43,10 +42,10 @@ class FilmController extends Controller
             'end_production_date' => ["required", new CompareDateRule($request->get('start_production_date'))],
         ]);
         $data = $request->all();
-        unset($data['_token']);
         $data['start_production_date'] = $this->_format_date_to_DB($data['start_production_date']);
         $data['end_production_date'] = $this->_format_date_to_DB($data['end_production_date']);
-        DB::table('films')->insert($data);
+        $filmInstance = new Film($data);
+        $filmInstance->save();
         return $this->backToMain('The film was successfully saved');
     }
 

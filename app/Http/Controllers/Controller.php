@@ -10,7 +10,6 @@ use Illuminate\Routing\Controller as BaseController;
 use App\Models\Employee;
 use App\Models\Film;
 
-use Illuminate\Support\Facades\View;
 
 class Controller extends BaseController
 {
@@ -29,9 +28,8 @@ class Controller extends BaseController
         $data = [
             'customMessage'  => $customMessage,
             'employees' => Employee::getList(),
-            'allDates' => Film::getAllDates(),
+            'allDates' => (new Film())->getAllDates(),
         ];
-
-        return View::make('index')->with($data);
+        return redirect()->route('main', $data);
     }
 }

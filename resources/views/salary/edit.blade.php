@@ -1,14 +1,14 @@
 @extends('layout')
 @section('content')
-    <h1>Edit salary</h1>
+    <h1 class="text-center">Edit salary</h1>
     <form method="post" action="/salary/save">
         @csrf
-        <div class="row form-group mt-4">
+        <div class="row form-group mt-4 p-3 d-flex align-items-center rounded border border-primary">
             <div class="col-sm mb-2">
                 <label for="employee">Choose a film</label>
                 <select class="selectpicker" aria-label="Choose a film" data-live-search="true" name="film_id">
                     @foreach ($films as $film)
-                        <option value="{{$film->id}}">{{$film->title}}</option>
+                        <option value="{{$film['id']}}">{{$film['title']}}</option>
                     @endforeach
                 </select>
             </div>
@@ -31,7 +31,7 @@
     </form>
     @if ($errors->any())
         <div class="alert alert-danger mt-2" onclick="this.remove();">
-            <ul>
+            <ul class="m-0">
                 @foreach($errors->all() as $error)
                     <li>{{$error}}</li>
                 @endforeach

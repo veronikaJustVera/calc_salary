@@ -41,10 +41,28 @@
         <tbody>
             @foreach ($data as $row)
                 <tr>
-                    <td>{{$row['employee']}}</td>
-                    <td>{{$row['role']}}</td>
-                    <td>{{$row['month']}}</td>
-                    <td>{{$row['salary']}}</td>
+                    <td>
+                        @if(!empty($row->name))
+                            {{$row->name}}
+                        @else
+                            Unknown
+                        @endif
+                    </td>
+                    <td>
+                        @if(!empty($row->role))
+                            {{$row->role}}
+                        @else
+                            Unknown
+                        @endif
+                    </td>
+                    <td>{{$row->date}}</td>
+                    <td>
+                        @if(!empty($row->salary))
+                            {{$row->salary}}
+                        @else
+                            0
+                        @endif
+                    </td>
                 </tr>
             @endforeach
         </tbody>
